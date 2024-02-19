@@ -11,15 +11,11 @@ contract ContractTest is Test {
         myContract = new Contract();
     }
 
-    function testA() public {
-        assertLt(myContract.a(), 256);
+    function testMsg1() public {
+        assertEq(myContract.msg1(), "Hello World");
     }
 
-    function testB() public {
-        assertGe(myContract.b(), 256);
-    }
-
-    function testSum() public {
-        assertEq(myContract.a() + myContract.b(), myContract.sum());
+    function testMsg2Length() public {
+        assertGt(bytes(myContract.msg2()).length, 32);
     }
 }

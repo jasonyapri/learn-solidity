@@ -2,7 +2,6 @@
 pragma solidity ^0.8.20;
 
 contract Contract {
-    uint8 public a = 8;
-    uint16 public b = 260;
-    uint256 public sum = a + b;
+    bytes32 public msg1 = "Hello World";
+    string public msg2 = "012345678901234567890123456789012";
 }
