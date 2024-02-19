@@ -6,23 +6,21 @@ import "../src/Contract.sol";
 
 contract ContractTest is Test {
     Contract public myContract;
+    address msgSender = address(3);
+    address charity = address(4);
 
     function setUp() public {
-        myContract = new Contract();
+        vm.prank(msgSender);
+        myContract = new Contract(charity);
+        address(myContract).call{value: 4 ether}("");
     }
 
-    function testDouble() public {
-        assertEq(myContract.double(2), 4);
-        assertEq(myContract.double(4), 8);
+    function testSend() public {
+        assertEq(address(myContract).balance, 4 ether);
     }
 
-    function testDoubleWithTwoParams() public {
-        (uint x, uint y) = myContract.double(2, 2);
-        assertEq(x, 4);
-        assertEq(y, 4);
-
-        (uint x2, uint y2) = myContract.double(5, 10);
-        assertEq(x2, 10);
-        assertEq(y2, 20);
+    function testDonate() public {
+        myContract.donate();
+        assertEq(charity.balance, 4 ether);
     }
 }

@@ -1,15 +1,28 @@
 // SPDX-License-Identifier: MIT
+import "forge-std/console.sol";
+
 pragma solidity ^0.8.20;
 
 contract Contract {
-    function double(uint param) external pure returns (uint result) {
-        result = param * 2;
+    address public owner;
+    address public charity;
+
+    constructor(address _charity) {
+        owner = msg.sender;
+        charity = _charity;
     }
 
-    function double(
-        uint param1,
-        uint param2
-    ) external pure returns (uint, uint) {
-        return (param1 * 2, param2 * 2);
+    receive() external payable {
+        console.log(msg.value);
+    }
+
+    function tip() public payable {
+        (bool success, ) = owner.call{value: msg.value}("");
+        require(success);
+    }
+
+    function donate() public {
+        (bool success, ) = charity.call{value: address(this).balance}("");
+        require(success);
     }
 }
