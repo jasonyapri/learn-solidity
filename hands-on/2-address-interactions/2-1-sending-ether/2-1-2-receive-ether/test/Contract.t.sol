@@ -6,23 +6,19 @@ import "../src/Contract.sol";
 
 contract ContractTest is Test {
     Contract public myContract;
+    address msgSender = address(3);
 
     function setUp() public {
+        hoax(msgSender);
         myContract = new Contract();
     }
 
-    function testDouble() public {
-        assertEq(myContract.double(2), 4);
-        assertEq(myContract.double(4), 8);
-    }
+    function testSendEther() public {
+        address contractAddr = address(myContract);
 
-    function testDoubleWithTwoParams() public {
-        (uint x, uint y) = myContract.double(2, 2);
-        assertEq(x, 4);
-        assertEq(y, 4);
+        // send 2 ether without any calldata
+        contractAddr.call{value: 2 ether}("");
 
-        (uint x2, uint y2) = myContract.double(5, 10);
-        assertEq(x2, 10);
-        assertEq(y2, 20);
+        assertEq(contractAddr.balance, 2 ether);
     }
 }
