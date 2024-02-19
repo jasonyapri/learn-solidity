@@ -2,15 +2,16 @@
 pragma solidity ^0.8.20;
 
 contract Contract {
-    enum Foods {
-        Apple,
-        Pizza,
-        Bagel,
-        Banana
+    uint public x;
+    constructor(uint arg) {
+        x = arg;
     }
 
-    Foods public food1 = Foods.Apple;
-    Foods public food2 = Foods.Pizza;
-    Foods public food3 = Foods.Bagel;
-    Foods public food4 = Foods.Banana;
+    function increment() external {
+        x++;
+    }
+
+    function add(uint param) external view returns (uint) {
+        return param + x;
+    }
 }
