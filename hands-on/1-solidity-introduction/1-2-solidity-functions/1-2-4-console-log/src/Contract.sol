@@ -1,16 +1,14 @@
-// SPDX-License-Identifier: MIT
+// SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.20;
 
-contract Contract {
-    enum Foods {
-        Apple,
-        Pizza,
-        Bagel,
-        Banana
-    }
+import "forge-std/console.sol";
 
-    Foods public food1 = Foods.Apple;
-    Foods public food2 = Foods.Pizza;
-    Foods public food3 = Foods.Bagel;
-    Foods public food4 = Foods.Banana;
+contract Contract {
+    function winningNumber(
+        string calldata secretMessage
+    ) external returns (uint) {
+        console.log(secretMessage);
+        uint number = 794;
+        return number;
+    }
 }
