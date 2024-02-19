@@ -10,7 +10,7 @@ contract ExampleTest is Test {
 
     function setUp() public {
         b = new B();
-        a = new A{ value: 1 ether }(address(b));
+        a = new A{value: 1 ether}(address(b));
     }
 
     function testExample() public {

@@ -12,7 +12,7 @@ contract A {
 
     function payHalf() external {
         uint256 balance = address(this).balance;
-        (bool success,) = b.call{value: balance / 2}("");
+        (bool success, ) = b.call{value: balance / 2}("");
         require(success);
     }
 }
