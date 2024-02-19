@@ -11,18 +11,18 @@ contract ContractTest is Test {
         myContract = new Contract();
     }
 
-    function testFoods() public {
-        Contract.Foods food1 = myContract.food1();
-        Contract.Foods food2 = myContract.food2();
-        Contract.Foods food3 = myContract.food3();
-        Contract.Foods food4 = myContract.food4();
+    function testDouble() public {
+        assertEq(myContract.double(2), 4);
+        assertEq(myContract.double(4), 8);
+    }
 
-        // enums can be translated to uint8 based on their position
-        // the first option is 0, then 1, 2, 3 etc...
-        uint enumSum = uint8(food1) +
-            uint8(food2) +
-            uint8(food3) +
-            uint8(food4);
-        assertGe(enumSum, 6);
+    function testDoubleWithTwoParams() public {
+        (uint x, uint y) = myContract.double(2, 2);
+        assertEq(x, 4);
+        assertEq(y, 4);
+
+        (uint x2, uint y2) = myContract.double(5, 10);
+        assertEq(x2, 10);
+        assertEq(y2, 20);
     }
 }
